@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coach Shay | Fitness Coach</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #f5f0e8;
+      --sage: #4a7c59;
+      --sage-light: #e8f0e9;
+      --gray: #ede8df;
+      --nude: #7a4a28;
+      --text-dark: #1e1e1b;
+      --text-soft: #4a4843;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text-dark); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 24px; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(74,124,89,0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-tag { font-weight: 500; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+    .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 16vw, 160px); line-height: 0.9; color: var(--text-dark); opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
+    .hero-name span { display: block; color: var(--nude); }
+    .hero-divider { width: 60px; height: 2px; background: var(--sage); margin: 28px auto; opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s; }
+    .hero-sub { font-size: clamp(14px, 3vw, 18px); font-weight: 400; color: var(--text-soft); max-width: 480px; line-height: 1.75; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.9s ease forwards 0.7s; }
+    .hero-cta { display: inline-block; padding: 16px 40px; border: 1.5px solid var(--sage); color: var(--sage); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, color 0.3s; opacity: 0; animation: fadeUp 0.9s ease forwards 0.85s; }
+    .hero-cta:hover { background: var(--sage); color: var(--white); }
+    .about { padding: 100px 24px; max-width: 760px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 20px; display: block; }
+    .about h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 8vw, 72px); line-height: 1; margin-bottom: 28px; color: var(--text-dark); }
+    .about p { font-size: clamp(15px, 2.5vw, 17px); line-height: 1.9; color: var(--text-soft); margin-bottom: 20px; font-weight: 400; }
+    .services { padding: 80px 24px; background: var(--sage-light); }
+    .services-inner { max-width: 900px; margin: 0 auto; }
+    .services h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 8vw, 72px); margin-bottom: 12px; color: var(--text-dark); }
+    .services-sub { color: var(--text-soft); font-size: 15px; margin-bottom: 52px; font-weight: 400; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card { background: var(--white); border: 1px solid rgba(74,124,89,0.15); padding: 40px 28px; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--nude); transition: height 0.4s ease; }
+    .card:hover::before { height: 100%; }
+    .card:hover { border-color: rgba(74,124,89,0.4); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+    .card-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(122,74,40,0.15); line-height: 1; margin-bottom: 16px; }
+    .card h3 { font-weight: 500; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 12px; }
+    .card p { font-size: 14px; color: var(--text-soft); line-height: 1.75; font-weight: 400; }
+    .contact { padding: 100px 24px; max-width: 600px; margin: 0 auto; text-align: center; }
+    .contact h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 8vw, 72px); margin-bottom: 16px; color: var(--text-dark); }
+    .contact p { color: var(--text-soft); font-size: 16px; line-height: 1.8; margin-bottom: 48px; font-weight: 400; }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+    .contact-link { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--text-dark); text-decoration: none; padding: 16px 32px; border: 1px solid rgba(74,124,89,0.3); width: 100%; max-width: 380px; transition: border-color 0.3s, color 0.3s, background 0.3s; background: var(--white); font-weight: 400; }
+    .contact-link:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-light); }
+    .contact-link-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--nude); display: block; margin-bottom: 2px; font-weight: 500; }
+    footer { border-top: 1px solid rgba(74,124,89,0.15); padding: 32px 24px; text-align: center; font-size: 12px; color: var(--text-soft); letter-spacing: 0.1em; background: var(--gray); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <p class="hero-tag">Fitness Coach &amp; Lifestyle</p>
+    <h1 class="hero-name">Coach<span>Shay</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Staying active is a lifestyle. I coach Xtreme Hip Hop Step Aerobics and help people maximize their energy, their body, and their life.</p>
+    <a href="#contact" class="hero-cta">Get In Touch</a>
+  </section>
+  <section class="about">
+    <span class="section-label">About</span>
+    <h2>Move More.<br/>Live Full.</h2>
+    <p>I believe in maximizing life — keeping your body in motion, living right, eating well, and having fun while doing it. As a certified Xtreme Hip Hop Step Aerobics coach, I bring high energy and positivity to every single session.</p>
+    <p>Whether you're just starting your fitness journey, looking for a fun way to get your cardio in, or ready to push yourself to the next level — Coach Shay meets you right where you are.</p>
+  </section>
+  <section class="services">
+    <div class="services-inner">
+      <span class="section-label">What I Offer</span>
+      <h2>Services</h2>
+      <p class="services-sub">In-person classes, events, and coaching sessions</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3>Xtreme Hip Hop Step</h3>
+          <p>High-energy step aerobics classes that blend dance, music, and high energy. Fun, intense, and effective workout.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3>Group Fitness Events</h3>
+          <p>One-time and recurring fitness events ranging from beginner to advanced levels.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3>Small Group Sessions</h3>
